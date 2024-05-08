@@ -4,62 +4,62 @@
 
 MicroService Questions on DB Side : 
 
-Database per Service or Shared Database?
+1.Database per Service or Shared Database?
 Do you advocate for a database per microservice or a shared database among multiple microservices? What are the pros and cons of each approach?
 
-Data Consistency and Transactions
+2.Data Consistency and Transactions
 How do you ensure data consistency across multiple microservices? What strategies or patterns do you use for handling distributed transactions?
 
-Eventual Consistency and CQRS
+3.Eventual Consistency and CQRS
 Can you explain the concepts of eventual consistency and Command Query Responsibility Segregation (CQRS)? How do these concepts apply to microservices databases?
 
-Polyglot Persistence
+4.Polyglot Persistence
 What is polyglot persistence, and why might it be beneficial in a microservices architecture? Can you provide examples of when to use different types of databases for different microservices?
 
-Data Partitioning and Sharding
+5.Data Partitioning and Sharding
 How do you approach data partitioning and sharding in a microservices environment to ensure scalability? What are the challenges and best practices?
 
-Service Data Ownership
+6.Service Data Ownership
 Which microservice should own a particular set of data? How do you decide data ownership to avoid data duplication and ensure data consistency?
 
-Database Schema Evolution
+7.Database Schema Evolution
 How do you handle database schema changes in a microservices architecture without causing disruptions to other services? What tools or techniques do you use for database schema evolution?
 
-Data Access Patterns
+8.Data Access Patterns
 What are the common data access patterns used in microservices? How do you optimize data access for performance and scalability?
 
-Data Backup and Recovery
+9.Data Backup and Recovery
 What strategies do you employ for backing up and recovering data in a microservices environment? How do you ensure data integrity and availability?
 
-Monitoring and Observability
+10.Monitoring and Observability
 How do you monitor and observe database performance and health in a microservices architecture? What metrics do you track, and how do you troubleshoot database-related issues?
 
-Service Discovery and Database Connections
+11.Service Discovery and Database Connections
 How do microservices discover and connect to the appropriate databases? What role does service discovery play in database communication within a microservices architecture?
 
-Data Encryption and Security
+12.Data Encryption and Security
 What measures do you take to ensure data security and encryption in a microservices environment? How do you handle sensitive data across distributed systems?
 
-Database Replication and High Availability
+13.Database Replication and High Availability
 How do you set up database replication and ensure high availability in a microservices architecture? What strategies do you employ for failover and disaster recovery?
 
-Database Monitoring and Performance Tuning
+14.Database Monitoring and Performance Tuning
 What tools and techniques do you use for monitoring database performance in a microservices ecosystem? How do you identify and address performance bottlenecks?
 
-Database Versioning and Rollbacks
+15.Database Versioning and Rollbacks
 How do you manage database versioning and rollbacks in a microservices environment? What practices do you follow to ensure compatibility and consistency during upgrades?
 
-Microservices Decomposition and Data Boundaries
+16.Microservices Decomposition and Data Boundaries
 How does the decomposition of microservices affect data boundaries and database design? How do you ensure that each microservice has access to the data it needs without violating data encapsulation principles?
 
-Database Scaling Strategies
+17.Database Scaling Strategies
 What strategies do you employ for horizontally and vertically scaling databases in a microservices architecture? How do you determine when to scale up or scale out?
 
-Data Governance and Compliance
+18.Data Governance and Compliance
 How do you enforce data governance and compliance requirements in a microservices ecosystem? What considerations are important for maintaining regulatory compliance?
 
-Database Testing and Test Data Management
+19.Database Testing and Test Data Management
 What approaches do you take for testing databases within the context of microservices? How do you manage test data and ensure data integrity during testing cycles?
 
-Database Performance Isolation
+20.Database Performance Isolation
 How do you ensure that the performance of one microservice's database operations does not negatively impact other microservices? What techniques do you use for performance isolation?
