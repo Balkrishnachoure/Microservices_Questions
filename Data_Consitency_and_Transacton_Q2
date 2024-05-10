@@ -11,7 +11,11 @@ Solution :
                            microservices. There are two phaese : prepare and Commit.All the microservices must agree 
                            to commit the tranaction before changes are made in Data base ,ensuring atomicity .
 
-4.CQRS (Command Query Responsibility Segregation):
+4.CQRS (Command Query Responsibility Segregation): It  is an approach is which we seperate the code that handles writing
+        (means changing data) from the code that handle reading .This makes the code easier to understand and scalable .
+        Eg: Let suppose you are in restaurant , and customer contantly palcing the orders(Commands) and asking about 
+            the status(queries) . Here CQRS suggest to split the task bet two persons .One focus on taking the orders
+             (Commands) and other answering the order status(Queries) .
 
 5.Consistent Hashing: 
 
