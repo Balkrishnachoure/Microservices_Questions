@@ -1,4 +1,5 @@
- Q.How do you ensure data consistency across multiple microservices? What strategies or patterns do you use for handling distributed transactions?
+ Q.How do you ensure data consistency across multiple microservices? What strategies or patterns do you use for 
+   handling distributed transactions?
 Solution : 
 1. Saga Pattern : This Desing Pattern manage distributd trancations by breaking them into sequence of smaller Transactions .Each service involved in Transaction
                   publishes events to trigger subsequent actions(Later) and , if any step fails  compensating transactions are executed .
