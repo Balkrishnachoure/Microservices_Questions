@@ -6,7 +6,10 @@ Solution :
 
 2.Event Sourcing : In this pattern every change in application state will be captured as Sequence of event . Microservice subscribe to relevant event and
                    update the data accordingly . However it require careful design and management of Event Stream .
-3.Two-Phase Commit (2PC) :
+
+3.Two-Phase Commit (2PC) : It is the Traditional approach . In this one cordinator monitor all the transaction of all 
+                           microservices. There are two phaese : prepare and Commit.All the microservices must agree 
+                           to commit the tranaction before changes are made in Data base ,ensuring atomicity .
 
 4.CQRS (Command Query Responsibility Segregation):
 
