@@ -2,3 +2,17 @@ Q.Can you explain the concepts of eventual consistency and Command Query Respons
    How do these concepts apply to microservices databases?
 
 Solution : 
+
+Eventual Consistency : It is a consistency model used in  distributed computing and distributed Databases .Means when you 
+         make changes to the peice of data in distributed system , that changes will not reflect immediately in all copies of 
+         data accross the system .Instead ,the system guarentees that given enough time and no further updates ,all the 
+         copies will eventually be consistent .
+
+Command Query Responsibilty Segregation(CQRS) :  It is the Design Pattern in which system have seperate model for reading 
+              data and writing the data .
+In CQRS architectutre , Command represent actions that change the system state( creating the record , updating the data) 
+            ,while query represent the requests for data retrival .
+Eg : A microservice responsible for handling the user profile updates might have different data modle for writing
+    (Commands) than the one used for reading the user profiles(Queries) .
+This address the challenge of scalability , performance and consistency .
+                           
