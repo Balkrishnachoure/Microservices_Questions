@@ -1,6 +1,13 @@
 Q.What is polyglot persistence, and why might it be beneficial in a microservices architecture? 
   Can you provide examples of when to use different types of databases for different microservices?
 
-Solution : 
-
+Solution :  polyglot persistence is the practice of using multiple type of data bases within the single application . 
+            Databases are  chossen based on the specific requirement 
+           Eg : One micorservice may need relational database for structured data, while other may require NoSql database
+                for unstructured Database .
+when to use different types of databases for different microservices :
+1. Relational database such as PostgreSQL or MySQL to store data which require strong consistency and transaction support .
+2. NoSQL database like MongoDB or Couchbase to manage the data that keeps on growing . 
+3.Redis or Apache Ignite for session management services ;
+4.stream processing framework like Apache Kafka for storing and analyzing large volume of real time data efficiently .
 
