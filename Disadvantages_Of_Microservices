@@ -2,11 +2,12 @@ Disadvatages of Micorservice Architecture :
 
 1. Network Latency/Call delay  : Communication bet the microservices occur by  the network call, which can introduce the latency (time Lag)  in communication .
 
-2. Maintaing Data consistency in Database is Challenging , Especially in distributed trancations.
+2. Maintaing Data consistency in Database is Challenging as it can lead to data duplication , Especially in distributed trancations.
 
 3. Cost of maintainance of server/instances in high as we deploy each  microservice on different instance to avoid "single point of failure".
 
 4. As the number of service increases managing service discovery and load balancing become more complex .
 
-5. Monitoring , logging , troubleshooting in distributed architecture require specialized tools and expertise .
+5. deployment ,Monitoring , logging , troubleshooting in distributed architecture require specialized 
+   tools and expertise .Organization requires Devoops for this.
   
