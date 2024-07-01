@@ -4,7 +4,7 @@ Disadvatages of Micorservice Architecture :
 
 2. Maintaing Data consistency in Database is Challenging , Especially in distributed trancations.
 
-3. Cost of maintainance of server/instances in high as we deploy each  microsrvice on different instance to avoid "single point of failure".
+3. Cost of maintainance of server/instances in high as we deploy each  microservice on different instance to avoid "single point of failure".
 
 4. As the number of service increases managing service discovery and load balancing become more complex .
 
