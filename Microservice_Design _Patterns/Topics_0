@@ -1,0 +1,12 @@
+Microservices Patterns : 
+
+1.Api gateway . 
+2.Discovery server .
+3.Circuit breaker .
+4.Distributed Trancations (Saga patterns , 2PC) 
+5. CQRS (Command Query and Responsibility Segregation) 
+6. Bulkhead Pattern .
+7. Backend for  Frontends (BFF) .
+8. Database per service .
+9. Config Server . 
+10. Event Driven Architecture(Kafka ,Rabbit MQ) .
