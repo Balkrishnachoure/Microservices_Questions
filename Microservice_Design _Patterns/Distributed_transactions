@@ -1,1 +1,3 @@
+Distributed Transactions : 
 
+For this we should konw about ACID transactions , 2PC(@ phase commit) , Saga deggn pattern
