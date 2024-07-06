@@ -1,3 +1,21 @@
 Distributed Transactions : 
 
 For this we should konw about ACID transactions , 2PC(@ phase commit) , Saga deggn pattern
+
+A
+C 
+I
+D 
+
+Two Phase Commit(2PC) : Its all about updating the resources (data) accros multiple nodes in single atomic 
+operation .Update is carried out in 2 phase : 
+
+Here we have corridnator and nodes(Services) . Each node have to ensure to cordinator hat they are able to 
+update ,if they are unable to do it the coordinator is notified to rollback .
+
+2PC Repersents Synchronous blocking approach .This protocol basicaly block those objects that change before transaction
+completes .
+It is not supported by Rabbit MQ and Apcahe Kafka .
+
+
+Saga Pattern : 
