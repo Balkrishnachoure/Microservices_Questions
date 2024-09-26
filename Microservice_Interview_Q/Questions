@@ -1,44 +1,49 @@
-1. What is Spring Cloud, and how does it relate to Spring Boot in a microservices architecture?
-2. How does service discovery work in microservices, and how is it implemented using Spring Cloud?
+1. What are microservices, and how do they differ from monolithic architecture?
+  Follow-up: Why would you choose microservices over a monolithic application?
+
+2. What is Spring Cloud, and how does it relate to Spring Boot in a microservices architecture?
+   Follow-up: Can you explain the key components of Spring Cloud used in microservices?
+
+3. How does service discovery work in microservices, and how is it implemented using Spring Cloud?
     Follow-up: Can you explain the role of Eureka, Zookeeper, or Consul?
 
-3.How would you manage configuration in a microservices architecture using Spring Boot?
+4.How would you manage configuration in a microservices architecture using Spring Boot?
     Follow-up: What is Spring Cloud Config, and how does it help with centralized configuration?
 
-4 .Explain how you would implement inter-service communication in microservices.
+5.Explain how you would implement inter-service communication in microservices.
     Follow-up: What are the differences between synchronous (e.g., REST) and asynchronous (e.g., messaging with RabbitMQ, Kafka) communication in microservices?
 
-5.What are Circuit Breakers in microservices, and how do you implement them using Spring Boot?
+6.What are Circuit Breakers in microservices, and how do you implement them using Spring Boot?
     Follow-up: Can you explain the role of Netflix Hystrix or Resilience4j in handling fault tolerance?
 
-6.How do you ensure security in a microservices architecture using Spring Boot?
+7.How do you ensure security in a microservices architecture using Spring Boot?
     Follow-up: What role does Spring Security and OAuth 2.0 play in securing microservices?
 
-7.What is API Gateway, and why is it important in microservices architecture?
+8.What is API Gateway, and why is it important in microservices architecture?
     Follow-up: How would you implement an API Gateway using Spring Cloud Gateway or Zuul?
 
-8.How do you handle distributed transactions in microservices, and what challenges arise with this?
+9.How do you handle distributed transactions in microservices, and what challenges arise with this?
    Follow-up: Can you explain how you would implement the Saga pattern or use Eventual Consistency to handle transactions?
 
-9. What is the role of Docker and Kubernetes in a microservices architecture, and how do they integrate with Spring Boot?
+10. What is the role of Docker and Kubernetes in a microservices architecture, and how do they integrate with Spring Boot?
     Follow-up: How would you containerize a Spring Boot microservice and deploy it on Kubernetes?
 
-10. How do you perform logging and monitoring in a microservices architecture using Spring Boot?
+111. How do you perform logging and monitoring in a microservices architecture using Spring Boot?
    Follow-up: Can you explain how tools like ELK (Elasticsearch, Logstash, Kibana) stack or Prometheus/Grafana are used for monitoring and observability?
 
-11. What is a Distributed Tracing system, and how do you implement it in Spring Boot microservices?
+12. What is a Distributed Tracing system, and how do you implement it in Spring Boot microservices?
    Follow-up: Can you explain the role of tools like Spring Cloud Sleuth and Zipkin for tracing service calls?
 
-12. How do you version your microservices APIs, and why is it important?
+13. How do you version your microservices APIs, and why is it important?
   Follow-up: What are the different strategies for versioning REST APIs, and how would you handle backward compatibility?
 
-13.How do you manage the scaling of microservices in a Spring Boot application?
+14.How do you manage the scaling of microservices in a Spring Boot application?
   Follow-up: Can you explain horizontal vs vertical scaling and how tools like Kubernetes or Spring Cloud LoadBalancer aid in scaling microservices?
 
-14.What is the role of a message broker in microservices, and how can it be implemented in Spring Boot?
+15.What is the role of a message broker in microservices, and how can it be implemented in Spring Boot?
    Follow-up: How would you integrate message brokers like RabbitMQ, Apache Kafka, or ActiveMQ in a Spring Boot-based microservices system?
 
-15 .How do you implement load balancing in a microservices architecture using Spring Boot?
+16.How do you implement load balancing in a microservices architecture using Spring Boot?
    Follow-up: Can you explain the role of Spring Cloud LoadBalancer or external tools like Nginx or HAProxy in distributing traffic?
 
 
