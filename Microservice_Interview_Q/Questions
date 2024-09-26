@@ -28,7 +28,7 @@
 10. What is the role of Docker and Kubernetes in a microservices architecture, and how do they integrate with Spring Boot?
     Follow-up: How would you containerize a Spring Boot microservice and deploy it on Kubernetes?
 
-111. How do you perform logging and monitoring in a microservices architecture using Spring Boot?
+11. How do you perform logging and monitoring in a microservices architecture using Spring Boot?
    Follow-up: Can you explain how tools like ELK (Elasticsearch, Logstash, Kibana) stack or Prometheus/Grafana are used for monitoring and observability?
 
 12. What is a Distributed Tracing system, and how do you implement it in Spring Boot microservices?
