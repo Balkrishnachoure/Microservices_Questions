@@ -1,1 +1,26 @@
 
+Service discovery in microservices allows services to find and communicate with each other without hardcoding network locations (like IP addresses or URLs). 
+This is crucial in dynamic environments where instances of services may scale up or down, move between hosts, or change their network addresses.
+Service discovery automates the process of locating services, enabling dynamic routing and scaling.
+
+How Service Discovery Works :
+1.Service Registration: Each service registers itself with a Service Registry, providing its network address (IP/hostname and port).
+2.Service Discovery: When one service needs to communicate with another, it queries the service registry to find the location of the target service.
+3.Health Monitoring: The registry monitors the health of services. Unhealthy instances are removed from the registry to ensure that only available services are discoverable.
+
+
+Spring Cloud provides easy integration for service discovery via various tools like Eureka, Zookeeper, and Consul .
+
+1. Add dependencies in pom.xml : 
+
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+
+2.Enable Eureka Client by adding @EnableEurekaClient to your main application class.
+
+3.In application.properties or application.yml, configure the Eureka server location:  
+
+     eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
