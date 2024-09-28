@@ -24,6 +24,7 @@ Spring Cloud provides easy integration for service discovery via various tools l
 
      eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 -----------------------------------------------------------------------------------------------
+
 Ans 4 : There are several strategies to manage configuration, especially when dealing with microservices that are deployed 
 independently but need to share certain configurations (like database credentials, API URLs, etc.)
 
@@ -49,6 +50,131 @@ independently but need to share certain configurations (like database credential
     duplication.
 
 ### What is Spring Cloud Config, and how does it help with centralized configuration?
+
+Ans : It consists of two main components:
+
+1.Config Server:
+-> A standalone Spring Boot application that serves as a central place to manage external 
+   configurations for microservices.
+-> It retrieves configuration properties from external sources, usually a Git repository 
+   (but also other backends like file systems, HashiCorp Vault, or databases).
+-> Microservices fetch their configurations from the Config Server, either at startup or on-demand, 
+   reducing the need to store configuration locally.
+
+2.Config Client:
+ ->Microservices act as config clients, fetching their configurations from the central config server.
+ ->You can easily enable this by including spring-cloud-config-client in your microservices' dependencies.
+ ->The @RefreshScope annotation can be used in Spring Boot applications to refresh configuration properties 
+   without restarting the application, supporting dynamic reloading of configuration. 
+
+## Code Setup : 
+
+Step 1: Set Up the Spring Cloud Config Server :
+
+1.Add Dependencies in pom.xml :
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-config-server</artifactId>
+</dependency>
+
+2. Enable Config Server in the Main Application :
+
+ @SpringBootApplication
+@EnableConfigServer
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+
+3.Configure the Config Server (application.yml)
+
+   server:
+  port: 8888  # Config server will run on this port
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/your-username/config-repo  # Replace with your repo URL
+          clone-on-start: true
+
+
+4.Create a Git Repository for Configuration Files
+
+config-repo/
+├── microservice-1.yml
+├── microservice-2.yml
+└── application.yml
+
+5. Run the Config Server :
+->  You can verify that the server is working by accessing:
+        Common config: http://localhost:8888/application/default .
+        Service-specific config: http://localhost:8888/microservice-1/default .
+
+------------------
+STEP 2 : Set Up the Config Client (Microservice) :
+
+1. Add Dependencies in pom.xml :
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+
+2. Configure Each Microservice (bootstrap.yml) : 
+ ->Each microservice needs to know where the Config Server is. In the bootstrap.yml file of each microservice, add:
+
+spring:
+  application:
+    name: microservice-1  # Replace with your microservice name
+  cloud:
+    config:
+      uri: http://localhost:8888  # The URL of the Config Server
+      fail-fast: true  # Fail the service fast if config server is not available
+
+ -> The spring.application.name should match the configuration file stored in the Git repo (e.g., microservice-1.yml for microservice-1).
+
+3. Use Configuration Properties : You can now use configuration properties from the Git repository within your microservice using @Value or @ConfigurationProperties annotations.
+
+
+@RestController
+public class GreetingController {
+  
+    @Value("${greeting.message}")  // Example greeting.message present in git file 
+    private String message;
+  
+    @GetMapping("/greet")
+    public String greet() {
+        return message;
+    }
+}
+
+4. Enabling Dynamic Configuration Refresh : Add @RefreshScope in Microservices
+
+@RestController
+@RefreshScope
+public class GreetingController {
+  
+    @Value("${greeting.message}")
+    private String message;
+  
+    @GetMapping("/greet")
+    public String greet() {
+        return message;
+    }
+}
+
+
+---------------------------------
+-----------------------------------
+
+
+
+
+
+
 
 
 
