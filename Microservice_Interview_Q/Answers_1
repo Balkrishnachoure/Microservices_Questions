@@ -1,4 +1,4 @@
-
+Ans 3 : 
 Service discovery in microservices allows services to find and communicate with each other without hardcoding network locations (like IP addresses or URLs). 
 This is crucial in dynamic environments where instances of services may scale up or down, move between hosts, or change their network addresses.
 Service discovery automates the process of locating services, enabling dynamic routing and scaling.
@@ -23,4 +23,33 @@ Spring Cloud provides easy integration for service discovery via various tools l
 3.In application.properties or application.yml, configure the Eureka server location:  
 
      eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+-----------------------------------------------------------------------------------------------
+Ans 4 : There are several strategies to manage configuration, especially when dealing with microservices that are deployed 
+independently but need to share certain configurations (like database credentials, API URLs, etc.)
+
+1. Local Configuration with application.properties or application.yml:
+ -> Each microservice can have its own application.properties or application.yml file that defines its configuration.
+ -> This is the simplest approach but can become cumbersome when managing many microservices, as configuration is scattered and duplicated across services.
+
+2. Profiles for Environment-Specific Configurations:
+ -> Spring Boot allows setting different profiles for different environments (e.g., dev, test, prod) with separate configuration 
+  files like application-dev.yml, application-prod.yml.
+ -> You can switch between profiles using the "spring.profiles.active" property, but this still requires managing configurations in each service individually.
+
+3.Environment Variables and Command-Line Arguments:
+ -> You can override configuration values using environment variables or by passing arguments at runtime. This is often used in containerized 
+   environments (e.g., Docker, Kubernetes) to inject configuration dynamically.
+
+4. Centralized Configuration with Spring Cloud Config:
+ -> Spring Cloud Config provides a centralized configuration server that serves the configuration for all microservices 
+    from a single source, such as a Git repository.
+ -> Microservices fetch their configuration from this centralized server at startup or refresh 
+    their configuration at runtime.
+ -> This helps to externalize and centralize configuration management, simplifying updates and avoiding 
+    duplication.
+
+### What is Spring Cloud Config, and how does it help with centralized configuration?
+
+
+
 
