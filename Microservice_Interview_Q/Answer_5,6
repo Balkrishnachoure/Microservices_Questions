@@ -183,8 +183,80 @@ If you're running Kafka locally, you will need to start the Kafka broker and Zoo
 
 ================================================================================
 
+6.What are Circuit Breakers in microservices, and how do you implement them using Spring Boot?
+    Follow-up: Can you explain the role of Netflix Hystrix or Resilience4j in handling fault tolerance?
 
 
+Ans : A Circuit Breaker is a design pattern used in microservices to handle failures gracefully. In distributed systems, service-to-service communication may fail due to network issues, service downtimes, or heavy loads. The Circuit Breaker pattern prevents a system from making requests to an already failing service by short-circuiting the calls after a threshold of failures is reached.
 
+Note : This pattern prevents continuous failure cascades, protecting other services and avoiding performance degradation in the entire system.
+
+## How It Works:
+Closed State: The circuit is closed, and all requests are sent to the service. If a certain number of consecutive failures occur, the circuit transitions to the Open state.
+
+Open State: In this state, no requests are sent to the failing service. Instead, an exception is returned immediately or a fallback mechanism is triggered.
+
+Half-Open State: After a specified amount of time, the circuit allows a few requests to pass through to check if the service has recovered. If successful, the circuit closes. If it fails again, it remains open.
+
+## Implementing Circuit Breaker in Spring Boot :There are two popular libraries used for Circuit Breaker patterns in Spring Boot:
+
+1.Netflix Hystrix .
+2.Resilience4j .
+
+
+1. Resilience4j (Recommended)
+Resilience4j is a lightweight, easy-to-use fault-tolerance library inspired by Netflix Hystrix but designed for Java 8 and functional programming.
+
+## Steps to Implement Resilience4j Circuit Breaker:
+
+Step 1: Add Dependencies:
+-----------------
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot2</artifactId>
+    <version>1.7.1</version>
+</dependency>
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-circuitbreaker</artifactId>
+    <version>1.7.1</version>
+</dependency>
+
+----------------
+Step 2 : Configure Circuit Breaker in application.properties or application.yml:
+
+-----------------
+resilience4j.circuitbreaker:
+  instances:
+    myService:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10s
+      permittedNumberOfCallsInHalfOpenState: 3
+----------------
+Step 3 : Using the Circuit Breaker in Service Calls:
+
+--------------------
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class MyService {
+
+    @CircuitBreaker(name = "myService", fallbackMethod = "fallbackResponse")
+    public String callExternalService() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("http://external-service/api", String.class);
+    }
+
+    public String fallbackResponse(Throwable throwable) {
+        return "Fallback response due to error: " + throwable.getMessage();
+    }
+}
+
+-------------------
 
 
