@@ -1,4 +1,190 @@
 5.Explain how you would implement inter-service communication in microservices.
     Follow-up: What are the differences between synchronous (e.g., REST) and asynchronous (e.g., messaging with RabbitMQ, Kafka) communication in microservices?
 
-Ans : 
+Ans : There are two common patterns for inter-service communication:  
+
+1. Synchronous Communication: This involves real-time communication where the calling service waits for a response.
+           -> REST (Representational State Transfer) over HTTP is widely used for synchronous communication
+2.Asynchronous Communication: In this case, the services don't need to wait for a response. The calling service sends a
+     message to a message broker, which is processed by another service at its own pace.
+           ->Message Brokers like RabbitMQ, Apache Kafka, or Amazon SQS are used for asynchronous communication, where a 
+        service produces a message, and another service consumes it.
+           ->Event-Driven Architecture: Services emit events when something happens (e.g., an order is placed), and other 
+        services listen and react to these events asynchronously
+
+## How to Configure Kakfa in Springboot : Steps : 
+
+Step 1 : 1. Add Dependencies :In your pom.xml (for Maven), add the following dependencies:
+-----------------------
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.kafka</groupId>
+    <artifactId>spring-kafka</artifactId>
+</dependency>
+-------------------------
+Step 2 :  Kafka Configuration in application.properties or application.yml
+------------------
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: my-group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+-----------------
+
+Step 3 : 3. Kafka Producer Configuration : You can create a Kafka producer bean in your configuration class:
+------------------------
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.context.annotation.Configuration;
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+public class KafkaProducerConfig {
+
+    @Bean
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+}
+
+----------------------
+
+Step 4 : 4. Kafka Consumer Configuration :Similarly, you can create a Kafka consumer bean in your configuration class:
+-----------------------
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.context.annotation.Configuration;
+import java.util.HashMap;
+import java.util.Map;
+
+@EnableKafka
+@Configuration
+public class KafkaConsumerConfig {
+
+    @Bean
+    public ConsumerFactory<String, Object> consumerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group-id");
+        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(), new JsonDeserializer<>(Object.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
+}
+
+----------------------
+
+Step 5 : Creating Kafka Producer and Consumer Services
+  -> Producer Service Example:
+--------
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+public class KafkaProducerService {
+
+    private static final String TOPIC = "my-topic";
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    public void sendMessage(String key, Object message) {
+        kafkaTemplate.send(TOPIC, key, message);
+    }
+}
+
+--------
+-> Consumer Listener Example:
+     You can use @KafkaListener to listen to Kafka messages in a consumer service.
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+---------
+@Service
+public class KafkaConsumerService {
+
+    @KafkaListener(topics = "my-topic", groupId = "my-group-id")
+    public void consume(Object message) {
+        System.out.println("Received message: " + message);
+    }
+}
+------------
+
+Step 6 : Using Kafka Producer and Consumer : 
+    You can inject KafkaProducerService into a controller or service and send messages like this:
+----------------
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MessageController {
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
+
+    @PostMapping("/publish")
+    public String publishMessage(@RequestBody Object message) {
+        kafkaProducerService.sendMessage("key", message);
+        return "Message sent to Kafka!";
+    }
+}
+----------------------
+
+Step 7  : 7. Running Kafka Locally
+If you're running Kafka locally, you will need to start the Kafka broker and Zookeeper (Kafka depends on Zookeeper) before running your Spring Boot application. You can use Docker for this:
+
+
+================================================================================
+
+
+
+
+
+
