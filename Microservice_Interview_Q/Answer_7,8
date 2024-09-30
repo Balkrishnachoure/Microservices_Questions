@@ -14,3 +14,8 @@ mTLS (Mutual TLS): Using mTLS, both services authenticate each other, ensuring t
 3.Role-Based Access Control (RBAC): Implement role-based access control within each microservice using Spring Security. You can define different roles (e.g., admin, user, etc.) and restrict access to certain endpoints based on roles or permissions.
 
 4.Service Isolation: Use firewalls, network policies, and security groups to isolate services in different environments and ensure only the required services can communicate with each other.
+
+5.API Rate Limiting and Throttling: Prevent Denial of Service (DoS) attacks by implementing rate limiting and throttling at the API gateway level. This ensures that a single user or service cannot overwhelm the system with too many requests.
+
+6.Auditing and Logging: Maintain logs of all authentication, authorization, and access control events. Use logging tools like ELK (Elasticsearch, Logstash, Kibana) or Splunk for audit trails and anomaly detection.
+
