@@ -1,1 +1,11 @@
+9.How do you handle distributed transactions in microservices, and what challenges arise with this?
+   Follow-up: Can you explain how you would implement the Saga pattern or use Eventual Consistency to handle transactions?
+Ans .
+In microservices architectures, a distributed transaction involves multiple services that need to maintain data consistency across different databases or services. Unlike monolithic systems where a single database transaction (often following ACID principles) can maintain consistency, microservices are decentralized, often have different databases, and cannot easily use traditional ACID transactions.
 
+Challenges with Distributed Transactions  : 
+1.Lack of ACID Compliance: Microservices typically use independent databases, and achieving ACID properties (Atomicity, Consistency, Isolation, Durability) across these services is challenging.
+
+2.Data Consistency: Ensuring consistency across different microservices is difficult. The CAP theorem (Consistency, Availability, and Partition Tolerance) suggests that in distributed systems, one has to make trade-offs between these properties .
+
+3.
