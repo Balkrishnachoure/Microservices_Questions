@@ -1,0 +1,4 @@
+5.Explain how you would implement inter-service communication in microservices.
+    Follow-up: What are the differences between synchronous (e.g., REST) and asynchronous (e.g., messaging with RabbitMQ, Kafka) communication in microservices?
+
+Ans : 
