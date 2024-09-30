@@ -8,4 +8,44 @@ Challenges with Distributed Transactions  :
 
 2.Data Consistency: Ensuring consistency across different microservices is difficult. The CAP theorem (Consistency, Availability, and Partition Tolerance) suggests that in distributed systems, one has to make trade-offs between these properties .
 
-3.
+3.Latency and Performance: Communication between distributed services increases latency, making the transaction slower.
+
+4.Partial Failures: In distributed systems, some services may succeed while others fail, making it harder to roll back or ensure a consistent state across services.
+
+## Approaches to Handle Distributed Transactions :
+There are two main patterns often used to handle distributed transactions: the Saga pattern and Eventual Consistency.
+### 1. Saga Pattern :
+A Saga is a sequence of local transactions that are coordinated using events or messages. Each service participates in a long-running transaction by executing a local transaction and then publishing an event to trigger the next local transaction in another service.
+
+Types of Sagas
+ 1.Choreography: Each service publishes events after completing its local transaction. Other services listen for these events and act accordingly.
+
+Pros: Simple to implement, no need for a central orchestrator.
+Cons: Difficult to manage if the workflow becomes complex. The service dependencies increase and debugging becomes harder.
+2.Orchestration: A central orchestrator (or saga coordinator) manages the sequence of service interactions by sending commands to services.
+
+Pros: Centralized control makes it easier to handle complex workflows.
+Cons: The orchestrator can becom
+
+## Compensation in Sagas: If one step in the saga fails, compensating transactions are initiated to undo the previously completed steps (e.g., if shipping fails, the order might need to be canceled, and the payment refunded).
+
+### 2.Eventual Consistency :
+In eventual consistency, services do not guarantee immediate consistency, but they ensure that the system reaches a consistent state eventually. This approach relies heavily on asynchronous communication through events and messages.
+
+How Eventual Consistency Works:
+1.Services perform local transactions and communicate state changes via events (e.g., with a message broker like Kafka or RabbitMQ).
+2.Other services respond to these events and update their own states, ensuring that the system as a whole eventually reaches a consistent state.
+3.There may be temporary inconsistencies between services, but they will converge to the same state over time.
+
+ # Challenges of Eventual Consistency:
+Temporary Inconsistencies: The system can be inconsistent for some time until all services process the updates.
+Conflict Resolution: Handling conflicts in data when services receive out-of-order or duplicate messages can be tricky.
+Monitoring and Auditing: Debugging eventual consistency problems is harder as there is no strict ordering of transactions.
+
+========================================================
+
+
+10. What is the role of Docker and Kubernetes in a microservices architecture, and how do they integrate with Spring Boot?
+    Follow-up: How would you containerize a Spring Boot microservice and deploy it on Kubernetes?
+Ans . 
+
