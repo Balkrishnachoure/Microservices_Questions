@@ -2,3 +2,25 @@
   Follow-up: What are the different strategies for versioning REST APIs, and how would you handle backward compatibility?
 
 Ans .
+
+----------------------------------------------------------------------------------
+14.How do you manage the scaling of microservices in a Spring Boot application?
+  Follow-up: Can you explain horizontal vs vertical scaling and how tools like Kubernetes or Spring Cloud LoadBalancer aid in scaling microservices?
+Ans .
+## Managing the Scaling of Microservices in a Spring Boot Application :
+Scaling microservices in a Spring Boot application involves ensuring that your services can handle increased traffic, workloads, or data. It can be achieved by either adding more resources to a single service (vertical scaling) or distributing the load across multiple instances (horizontal scaling).
+
+Techniques for Managing Scaling :
+1.Containerization with Docker:
+2.Orchestration with Kubernetes: 
+3.Spring Boot with Spring Cloud: 
+4.Auto-Scaling in Kubernetes: Kubernetes' Horizontal Pod Autoscaler (HPA) scales the number of pods based on observed CPU utilization or other application-provided metrics.
+5.Service Discovery and Load Balancing:
+
+## Horizontal vs Vertical Scaling : 
+1. Vertical Scaling (Scaling Up):Adding more resources (CPU, RAM, storage) to an existing machine or instance to handle increased workload.
+
+2.Horizontal Scaling (Scaling Out):
+Definition: Adding more instances of a service across multiple machines or nodes to distribute the load.
+
+
