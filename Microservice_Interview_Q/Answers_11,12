@@ -64,5 +64,56 @@ Ans .A Distributed Tracing System is a mechanism to track the flow of requests a
 
 Distributed tracing systems assign a trace ID to each request and use span IDs to represent individual operations within that trace. This allows engineers to visualize the full lifecycle of a request and analyze performance, latency, errors ,trace failures  at each stage.
 
+ ## Implementing Distributed Tracing in Spring Boot Microservices : 
+Spring Boot provides built-in support for distributed tracing using Spring Cloud Sleuth and Zipkin. Here's how to implement them:
+
+Step 1 : 
+Add dependencies: In your pom.xml, include dependencies for Spring Cloud Sleuth and Zipkin.
+-----------------
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+</dependency>
+
+----------------
+Step 2 : 
+Configure Zipkin: 
+In application.properties or application.yml, configure the Zipkin URL:
+------------------------------
+spring.zipkin.base-url=http://localhost:9411
+spring.sleuth.sampler.probability=1.0
+
+-----------------------------
+The sampler.probability can be adjusted to control the percentage of traces sampled. A value of 1.0 means all requests are traced, while 0.0 disables tracing.
+
+Step 3 : Start the Zipkin server: You can run Zipkin using Docker:
+
+   # Command : docker run -d -p 9411:9411 openzipkin/zipkin 
+
+Step 4 : Run your application: With Sleuth integrated, it will automatically propagate trace IDs and span IDs in headers when making calls between microservices (through HTTP or messaging systems like Kafka or RabbitMQ).
+
+Step 5 :
+View traces in Zipkin: You can view the trace information in the Zipkin UI (by default at http://localhost:9411).
+
+ ### Role of Spring Cloud Sleuth and Zipkin :
+
+1. Spring Cloud Sleuth : 
+Sleuth is responsible for generating and propagating trace and span IDs across services. It seamlessly integrates with Spring Boot's REST clients (like RestTemplate, WebClient), messaging clients, and Feign clients.
+
+2. Zipkin : 
+Zipkin is a distributed tracing system that collects and stores trace data. It visualizes the trace flow across microservices, enabling developers to analyze request paths and identify performance bottlenecks or failures.
+
+
+
+
+
+
+
+
+
 
 
