@@ -59,7 +59,10 @@ Prometheus stores the data and Grafana pulls the metrics from Prometheus to visu
 12. What is a Distributed Tracing system, and how do you implement it in Spring Boot microservices?
    Follow-up: Can you explain the role of tools like Spring Cloud Sleuth and Zipkin for tracing service calls?
 
-Ans
+Ans .A Distributed Tracing System is a mechanism to track the flow of requests across multiple 
+  services in a distributed microservices architecture.
+
+Distributed tracing systems assign a trace ID to each request and use span IDs to represent individual operations within that trace. This allows engineers to visualize the full lifecycle of a request and analyze performance, latency, errors ,trace failures  at each stage.
 
 
 
