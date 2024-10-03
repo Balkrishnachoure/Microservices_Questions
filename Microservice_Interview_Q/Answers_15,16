@@ -1,1 +1,31 @@
+15.What is the role of a message broker in microservices, and how can it be implemented in Spring Boot?
+   Follow-up: How would you integrate message brokers like RabbitMQ, Apache Kafka, or ActiveMQ in a Spring Boot-based microservices system?
+Ans.
 
+
+
+
+======================================================================================================================
+16.How do you implement load balancing in a microservices architecture using Spring Boot?
+   Follow-up: Can you explain the role of Spring Cloud LoadBalancer or external tools like Nginx or HAProxy in distributing traffic?
+
+Ans.A load balancer is a tool that distributes incoming network traffic across multiple servers to ensure no single server gets overwhelmed.
+
+ # Client-Side vs Server-Side Load Balancing:
+
+1. Client-Side Load Balancing: The logic for balancing requests is embedded in the client (or microservice), which selects which server instance to communicate with. For example, Spring Cloud LoadBalancer works as a client-side solution.
+
+2. Server-Side Load Balancing: The load balancer sits between the client and the server pool, routing requests from clients to backend servers. This is typical with Nginx, HAProxy, or hardware solutions.
+
+## Load Balancing Algorithms:
+Load balancers use various algorithms to decide how to distribute traffic:
+
+1.Round Robin: Distributes requests sequentially across the pool of servers.
+
+2.Least Connections: Directs traffic to the server with the fewest active connections.
+
+3.IP Hash: Routes traffic based on the IP address of the client, ensuring that requests from the same client are directed to the same server.
+
+4.Weighted Round Robin: Similar to round robin, but certain servers can be given more weight (priority) if they are more powerful.
+
+5.Random: Randomly selects a server to route traffic to.
