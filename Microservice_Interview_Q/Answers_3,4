@@ -26,6 +26,8 @@ Spring Cloud provides easy integration for service discovery via various tools l
 
      eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 -----------------------------------------------------------------------------------------------
+4. How would you manage configuration in a microservices architecture using Spring Boot?
+    Follow-up: What is Spring Cloud Config, and how does it help with centralized configuration?
 
 Ans 4 : There are several strategies to manage configuration, especially when dealing with microservices that are deployed 
 independently but need to share certain configurations (like database credentials, API URLs, etc.)
