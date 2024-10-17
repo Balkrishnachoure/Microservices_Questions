@@ -1,3 +1,5 @@
+3. How does service discovery work in microservices, and how is it implemented using Spring Cloud?
+    Follow-up: Can you explain the role of Eureka, Zookeeper, or Consul?
 Ans 3 : 
 Service discovery in microservices allows services to find and communicate with each other without hardcoding network locations (like IP addresses or URLs). 
 This is crucial in dynamic environments where instances of services may scale up or down, move between hosts, or change their network addresses.
